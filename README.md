@@ -2,7 +2,9 @@
 
 ```app.py``` will let you scrap through all instagram posts containing a hashtag, and like them for you! Replace the username and password at ```user = InstagramBot('username', 'password')``` and run the function.
 
+**Note**: Instagram will probably shut down your account, if you are liking pictures more than average. I would not let this run for more than 100 pictures a day to not get banned.
+
 ### Pre-req:
 ---
 1. ```$ pip install selenium```
-2. Gecko driver installed in python's directory (```$ which python``` to check the installed directory)
+2. [Gecko driver](https://github.com/mozilla/geckodriver/releases) installed in python's directory (```$ which python``` to check the installed directory)
