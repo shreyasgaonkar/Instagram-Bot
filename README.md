@@ -4,6 +4,7 @@
 
 **Note**: Instagram will probably shut down your account, if you are liking posts more than average. I would not let this run for more than 100 posts a day to not get banned.
 
+
 ### Pre-req:
 ---
 1. ```$ pip install selenium```
