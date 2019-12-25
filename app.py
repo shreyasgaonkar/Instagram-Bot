@@ -24,6 +24,8 @@ class InstagramBot:
         time.sleep(4)
 
     def LikePhotos(self, hashtag):
+        time.sleep(1)
+        count = 0
         bot = self.bot
         bot.get("https://www.instagram.com/explore/tags/" + hashtag)
         time.sleep(2)
@@ -51,9 +53,16 @@ class InstagramBot:
                 time.sleep(2)
                 # Like post
                 bot.find_element_by_class_name('glyphsSpriteHeart__outline__24__grey_9').click()
+                count += 1
+
+                # Don't like more than 50 posts
+                if count > 50:
+                    break
                 time.sleep(1)
             except:
                 pass
+
+        print("liked {} posts".format(count))
 
 
 # Magic!
