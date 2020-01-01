@@ -1,5 +1,6 @@
 import re
 import time
+import random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
@@ -50,19 +51,22 @@ class InstagramBot:
                 # Check if the links contains posts
                 val = re.search(r'^https://www.instagram.com/p/', image)
                 bot.get(val.string)
-                time.sleep(2)
+                # random sleep between 1 - 3 secs for any 'unusual activity'
+                time.sleep(random.choice([i for i in range(3)]))
                 # Like post
+                # If a post is already liked, this class will not be in the DOM
                 bot.find_element_by_class_name('glyphsSpriteHeart__outline__24__grey_9').click()
                 count += 1
 
                 # Don't like more than 50 posts
-                if count > 50:
+                if(count > 50):
                     break
                 time.sleep(1)
             except:
                 pass
 
         print("liked {} posts".format(count))
+        bot.quit()
 
 
 # Magic!
