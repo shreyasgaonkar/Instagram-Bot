@@ -55,11 +55,11 @@ class InstagramBot:
                 time.sleep(random.choice([i for i in range(3)]))
                 # Like post
                 # If a post is already liked, this class will not be in the DOM
-                bot.find_element_by_class_name('glyphsSpriteHeart__outline__24__grey_9').click()
+                bot.find_element_by_class_name('wpO6b').click()
                 count += 1
 
                 # Don't like more than 50 posts
-                if(count > 50):
+                if count > 50:
                     break
                 time.sleep(1)
             except:
