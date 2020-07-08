@@ -4,11 +4,16 @@
 
 Set username and password through environment variable: :tada:
 
-```bash
+```Shell
 vim ~/.bash_profile
 
-export username="username"
-export pass="password"
+# Linux/MacOS
+export username=username
+export pass=password
+
+# Windows
+set username=username
+set pass=password
 ```
 
 exit terminal to reflect the changes.
