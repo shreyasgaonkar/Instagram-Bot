@@ -30,7 +30,7 @@ class InstagramBot:
 
     def like_photos(self, hashtag):
         """Search hashtag URL and like first 50 posts"""
-        time.sleep(1)
+        time.sleep(5)
         count = 0
         bot = self.bot
         bot.get("https://www.instagram.com/explore/tags/" + hashtag)
@@ -61,7 +61,8 @@ class InstagramBot:
                 time.sleep(random.choice([1, 2, 3]))
 
                 # Like post
-                bot.find_element_by_class_name('wpO6b').click()
+                bot.set_page_load_timeout(10)
+                bot.find_element_by_css_selector('.fr66n > .wpO6b').click()
                 count += 1
 
                 # Don't like more than 50 posts
@@ -69,7 +70,7 @@ class InstagramBot:
                     break
                 time.sleep(1)
             except Exception as unhandled_exception:
-                pass
+                print(unhandled_exception)
 
         print("liked {} posts".format(count))
         bot.quit()
