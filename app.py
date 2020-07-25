@@ -28,6 +28,19 @@ class InstagramBot:
         password.send_keys(Keys.RETURN)
         time.sleep(4)
 
+        # Click optional "Bypass save login info"
+        try:
+            bot.find_element_by_css_selector('.cmbtv > button').click()
+        except Exception as exp:
+            print("No element to click: save login info. Skipping..")
+
+        time.sleep(1)
+        # Click optional "Turn on Notification"
+        try:
+            bot.find_element_by_css_selector('.mt3GC > button:last-of-type').click()
+        except Exception as exp:
+            print("No element to click: Turn on Notification. Skipping..")
+
     def like_photos(self, hashtag):
         """Search hashtag URL and like first 50 posts"""
         time.sleep(5)
