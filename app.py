@@ -19,6 +19,15 @@ class InstagramBot:
         bot = self.bot
         bot.get("https://www.instagram.com/accounts/login/")
         time.sleep(2)
+
+        # Click optional "Accept cookies from Instagram on this browser?"
+        try:
+            bot.find_element_by_css_selector('button.aOOlW').click()
+        except Exception as exp:
+            print("No element to click: Accept cookies from Instagram. Skipping..")
+
+        time.sleep(2)
+
         email = bot.find_element_by_name("username")
         password = bot.find_element_by_name("password")
         email.clear()
