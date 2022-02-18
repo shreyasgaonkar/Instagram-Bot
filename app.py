@@ -4,6 +4,7 @@ import random
 import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 
 class InstagramBot:
@@ -22,14 +23,14 @@ class InstagramBot:
 
         # Click optional "Accept cookies from Instagram on this browser?"
         try:
-            bot.find_element_by_css_selector('button.aOOlW').click()
+            bot.find_element(By.CSS_SELECTOR, 'button.aOOlW').click()
         except Exception as exp:
             print("No element to click: Accept cookies from Instagram. Skipping..")
 
         time.sleep(2)
 
-        email = bot.find_element_by_name("username")
-        password = bot.find_element_by_name("password")
+        email = bot.find_element(By.NAME, "username")
+        password = bot.find_element(By.NAME, "password")
         email.clear()
         password.clear()
         email.send_keys(self.username)
@@ -39,18 +40,19 @@ class InstagramBot:
 
         # Click optional "Bypass save login info"
         try:
-            bot.find_element_by_css_selector('.cmbtv > button').click()
+            bot.find_element(By.CSS_SELECTOR, '.cmbtv > button').click()
         except Exception as exp:
             print("No element to click: save login info. Skipping..")
 
         time.sleep(1)
         # Click optional "Turn on Notification"
         try:
-            bot.find_element_by_css_selector('.mt3GC > button:last-of-type').click()
+            bot.find_element(
+                By.CSS_SELECTOR, '.mt3GC > button:last-of-type').click()
         except Exception as exp:
             print("No element to click: Turn on Notification. Skipping..")
 
-    def like_photos(self, hashtag):
+    def like_posts(self, hashtag):
         """Search hashtag URL and like first 50 posts"""
         time.sleep(5)
         count = 0
@@ -60,11 +62,12 @@ class InstagramBot:
 
         # simulate scroll for lazy loading
         for i in range(3):
-            bot.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+            bot.execute_script(
+                'window.scrollTo(0, document.body.scrollHeight)')
             time.sleep(1+i)
 
         # Get all links, which will be later cleaned for the posts
-        links = bot.find_elements_by_xpath('//div/a')
+        links = bot.find_element(By.XPATH, "//div/a")
         links_hrefs = []
         for link in links:
             # if links have href tag, add it to the list
@@ -84,7 +87,7 @@ class InstagramBot:
 
                 # Like post
                 bot.set_page_load_timeout(10)
-                bot.find_element_by_css_selector('.fr66n > .wpO6b').click()
+                bot.find_element(By.CSS_SELECTOR, '.fr66n > .wpO6bn').click()
                 count += 1
 
                 # Don't like more than 50 posts
@@ -101,4 +104,4 @@ class InstagramBot:
 # Magic!
 USER = InstagramBot(os.environ.get('username'), os.environ.get('pass'))
 USER.login()
-USER.like_photos('hashtag-to-search')
+USER.like_posts('hashtag-to-search')
