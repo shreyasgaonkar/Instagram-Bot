@@ -67,7 +67,7 @@ class InstagramBot:
             time.sleep(1+i)
 
         # Get all links, which will be later cleaned for the posts
-        links = bot.find_element(By.XPATH, "//div/a")
+        links = bot.find_elements(By.XPATH, "//div/a")
         links_hrefs = []
         for link in links:
             # if links have href tag, add it to the list
@@ -87,7 +87,7 @@ class InstagramBot:
 
                 # Like post
                 bot.set_page_load_timeout(10)
-                bot.find_element(By.CSS_SELECTOR, '.fr66n > .wpO6bn').click()
+                bot.find_element(By.CSS_SELECTOR, '.fr66n > .wpO6b').click()
                 count += 1
 
                 # Don't like more than 50 posts
