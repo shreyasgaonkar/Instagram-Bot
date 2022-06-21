@@ -87,7 +87,7 @@ class InstagramBot:
 
                 # Like post
                 bot.set_page_load_timeout(10)
-                bot.find_element(By.CSS_SELECTOR, '.fr66n > .wpO6b').click()
+                bot.find_element(By.CSS_SELECTOR, '._aamu button').click()
                 count += 1
 
                 # Don't like more than 50 posts
