@@ -1,7 +1,8 @@
+import argparse
+import os
+import random
 import re
 import time
-import random
-import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -101,7 +102,35 @@ class InstagramBot:
         bot.quit()
 
 
-# Magic!
-USER = InstagramBot(os.environ.get('username'), os.environ.get('pass'))
-USER.login()
-USER.like_posts('hashtag-to-search')
+def parse_hashtag() -> str:
+    """Parse required and optional arguments"""
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--hashtag",
+                        required=False,
+                        help="Optional: Override hashtag")
+
+    args = parser.parse_args()
+
+    try:
+        hashtag = args.hashtag.lower()
+    except Exception as exp:
+        hashtag = "None"
+
+    return hashtag
+
+
+def main():
+    """Main function to like posts"""
+
+    hashtag = parse_hashtag()
+    if hashtag == "None":
+        hashtag = 'hashtag-to-search'  # fall back to this hashtag if not in CLI arguments
+
+    USER = InstagramBot(os.environ.get('username'), os.environ.get('pass'))
+    USER.login()
+    USER.like_posts(hashtag)
+
+
+if __name__ == "__main__":
+    main()
